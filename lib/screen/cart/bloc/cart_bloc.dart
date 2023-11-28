@@ -1,9 +1,6 @@
 import 'dart:async';
-
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-
 import '../../../data/cart_items.dart';
 import '../../home/models/Home_list_model.dart';
 
