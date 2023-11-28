@@ -5,7 +5,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import '../../home/models/Home_list_model.dart';
 import '../bloc/cart_bloc.dart';
 
-
 class CartTileWidget extends StatelessWidget {
   final HomeListModel productDataModel;
   final CartBloc cartBloc;
