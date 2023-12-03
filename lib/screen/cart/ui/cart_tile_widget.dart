@@ -40,8 +40,7 @@ class CartTileWidget extends StatelessWidget {
             children: [
               Text("\$" + productDataModel.body.toString(),
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              Row(
-                children: [
+
                   IconButton(
                       onPressed: () {
                         // homeBloc.add(HomeProductWishlistButtonClickedEvent(
@@ -54,8 +53,7 @@ class CartTileWidget extends StatelessWidget {
                             productDataModel: productDataModel));
                       },
                       icon: Icon(Icons.shopping_bag)),
-                ],
-              )
+
             ],
           ),
         ],
@@ -63,3 +61,4 @@ class CartTileWidget extends StatelessWidget {
     );
   }
 }
+
