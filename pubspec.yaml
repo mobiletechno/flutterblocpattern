@@ -30,8 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  bloc:
-  flutter_bloc:
+
 
 
 
@@ -40,7 +39,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: any
   sqflite: ^2.3.0
-  path_provider: any
+  flutter_bloc: ^7.0.0
+  equatable: ^2.0.0
+  dio: ^4.0.0
+
 
 dev_dependencies:
   flutter_test:

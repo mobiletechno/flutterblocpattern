@@ -1,12 +1,12 @@
-class HomeListModel {
-  HomeListModel({
-      this.postId, 
-      this.id, 
-      this.name, 
-      this.email, 
-      this.body,});
+class HomeModel {
+  HomeModel({
+    this.postId,
+    this.id,
+    this.name,
+    this.email,
+    this.body,});
 
-  HomeListModel.fromJson(dynamic json) {
+  HomeModel.fromJson(dynamic json) {
     postId = json['postId'];
     id = json['id'];
     name = json['name'];

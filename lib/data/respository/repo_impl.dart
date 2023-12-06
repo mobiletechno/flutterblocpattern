@@ -16,9 +16,11 @@ class RepoImpl implements Repo {
     try {
       final response = await _httpService.getRequest(
           "${AppConstant.BASEURL}/$pagination${AppConstant.LIST_API}");
+      print("${AppConstant.BASEURL}/$pagination${AppConstant.LIST_API}");
 
 
       if (response.statusCode == 200) {
+
         var jsonResponse =
         convert.jsonDecode(response.body);
         return jsonResponse;
