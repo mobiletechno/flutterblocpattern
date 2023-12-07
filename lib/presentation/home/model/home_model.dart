@@ -1,32 +1,36 @@
 class HomeModel {
   HomeModel({
-    this.postId,
     this.id,
-    this.name,
-    this.email,
-    this.body,});
+    this.date,
+    this.slug,
+    this.type,
+    this.link,
+    this.protected,
+  });
 
   HomeModel.fromJson(dynamic json) {
-    postId = json['postId'];
     id = json['id'];
-    name = json['name'];
-    email = json['email'];
-    body = json['body'];
+    date = json['date'];
+    slug = json['slug'];
+    type = json['type'];
+    link = json['link'];
+    protected = json['protected'];
   }
-  int? postId;
   int? id;
-  String? name;
-  String? email;
-  String? body;
+  String? date;
+  String? slug;
+  String? type;
+  String? link;
+  bool? protected;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['postId'] = postId;
     map['id'] = id;
-    map['name'] = name;
-    map['email'] = email;
-    map['body'] = body;
+    map['date'] = date;
+    map['slug'] = slug;
+    map['type'] = type;
+    map['link'] = link;
+    map['protected'] = protected;
     return map;
   }
-
 }

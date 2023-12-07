@@ -1,9 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/home_cubit.dart';
 import '../bloc/home_state.dart';
-
 
 class Home extends StatefulWidget {
   @override
@@ -11,6 +11,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +34,6 @@ class _HomeState extends State<Home> {
               child: CircularProgressIndicator(),
             );
           } else if (state is ErrorState) {
-            print("what is error ${ErrorState}");
             return Center(
               child: Icon(Icons.close),
             );
@@ -32,15 +41,24 @@ class _HomeState extends State<Home> {
             final homeList = state.homeList;
 
             return ListView.builder(
-              itemCount: homeList.length,
-              itemBuilder: (context, index) => Card(
-                child: ListTile(
-                  title: Text(homeList[index].name!),
-                  leading: CircleAvatar(
-                    backgroundImage: NetworkImage("https://media.licdn.com/dms/image/C5603AQEMcHiaYqWq7w/profile-displayphoto-shrink_200_200/0/1600714454740?e=1707350400&v=beta&t=Ras_zq0Xfvrts4qqzVL8HkTUNYm1Gv7WFziMjNhpK7k"),
-                  ),
-                ),
-              ),
+              controller: context.read<HomeCubit>().scrollListenercontroller,
+              physics: AlwaysScrollableScrollPhysics(),
+              itemCount: homeList.length + 1,
+              itemBuilder: (context, index) =>
+
+                       Card(
+                          child:  index > state.homeList!.length - 1
+                              ? Container(
+                            color: Colors.transparent,
+                            child: Center(child: CupertinoActivityIndicator()),
+                          ):ListTile(
+                            title: Text(homeList[index].slug!),
+                            leading: CircleAvatar(
+                              backgroundImage:
+                                  NetworkImage("${homeList[index].link!}"),
+                            ),
+                          ),
+                        ),
             );
           } else {
             return Container();
