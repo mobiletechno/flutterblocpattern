@@ -75,7 +75,7 @@ class _HomeState extends State<Home> {
                             trailing: GestureDetector(onTap: (){
                               context.read<HomeCubit>().addDB(homeList[index]);
                               print("newdata in DB--------------------------");
-                            },child:Icon(Icons.add)),
+                            },child:Icon(Icons.shopping_cart)),
                           ),
                         ),
             );
