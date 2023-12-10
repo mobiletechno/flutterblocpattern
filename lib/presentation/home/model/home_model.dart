@@ -1,5 +1,9 @@
 class HomeModel {
+
+
+
   HomeModel({
+    this.primaryid,
     this.id,
     this.date,
     this.slug,
@@ -9,6 +13,7 @@ class HomeModel {
   });
 
   HomeModel.fromJson(dynamic json) {
+    primaryid= json['primaryid'];
     id = json['id'];
     date = json['date'];
     slug = json['slug'];
@@ -16,6 +21,7 @@ class HomeModel {
     link = json['link'];
     protected = json['protected'];
   }
+  int? primaryid;
   int? id;
   String? date;
   String? slug;
@@ -25,6 +31,7 @@ class HomeModel {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['primaryid'] = primaryid;
     map['id'] = id;
     map['date'] = date;
     map['slug'] = slug;

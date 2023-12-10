@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../utils/route_management/navigation_service.dart';
 import '../bloc/home_cubit.dart';
 import '../bloc/home_state.dart';
+
 
 class Home extends StatefulWidget {
   @override
@@ -11,6 +13,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  // NavigationService service = NavigationService();
+  final _routeService = NavigationService.instance;
   @override
   void initState() {
     super.initState();
@@ -25,7 +29,18 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home list'),
+        automaticallyImplyLeading: true,
+
+        title: Text('Home list',overflow: TextOverflow.ellipsis,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold)),
+
+        actions: [
+
+          GestureDetector(onTap: (){
+            _routeService.routeTo('/cart');
+            print("navigated--------------------------");
+          },child:Icon(Icons.shopping_cart))
+        ],
+
       ),
       body: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
@@ -57,6 +72,10 @@ class _HomeState extends State<Home> {
                               backgroundImage:
                                   NetworkImage("${homeList[index].link!}"),
                             ),
+                            trailing: GestureDetector(onTap: (){
+                              context.read<HomeCubit>().addDB(homeList[index]);
+                              print("newdata in DB--------------------------");
+                            },child:Icon(Icons.add)),
                           ),
                         ),
             );

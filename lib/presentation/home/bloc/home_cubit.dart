@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/respository/repo.dart';
 import '../../../data/respository/repo_impl.dart';
+import '../../../data/storage/database_helper.dart';
 import '../model/home_model.dart';
 import 'home_state.dart';
 
@@ -36,6 +37,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   late Repo repository;
   int _paginationIndex = 10;
+  final dbHelper = DatabaseHelper.instance;
 
   // final Repo repository;
 
@@ -54,6 +56,20 @@ class HomeCubit extends Cubit<HomeState> {
     } catch (e) {
       emit(ErrorState());
     }
+  }
+  void addDB(HomeModel homeModel) async {
+    HomeModel newhomeModel = HomeModel(
+        id:homeModel.id ,
+      date:homeModel.date ,link:homeModel.link ,protected:homeModel.protected ,slug:homeModel.slug,type: homeModel.type
+
+    );
+    int id = await dbHelper.insert(newhomeModel);
+    // int id = await dbHelper.insert(newNote);
+
+    homeModel.id = id;
+    print("id------${homeModel.id}");
+      // _notes.add(newNote);
+
   }
 
   Future<void> handleRefresh() async {
