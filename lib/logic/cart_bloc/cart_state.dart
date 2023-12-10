@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
+
+import 'package:rajkumarpractice/data/model/home_model.dart';
+
 
 import '../../../data/storage/database_helper.dart';
-import '../../home/model/home_model.dart';
+
 
 part 'cart_cubit.dart';
 

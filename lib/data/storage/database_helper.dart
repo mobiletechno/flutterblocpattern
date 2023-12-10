@@ -1,6 +1,7 @@
+import 'package:rajkumarpractice/data/model/home_model.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../../presentation/home/model/home_model.dart';
+
 
 
 import 'dart:async';
@@ -10,7 +11,7 @@ import 'package:path_provider/path_provider.dart';
 
 class DatabaseHelper {
   static final _databaseName = "rajkumarcrud.db";
-  static final _databaseVersion = 4;
+  static final _databaseVersion = 1;
 
   static final table = 'ListlocalDB';
 

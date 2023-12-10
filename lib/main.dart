@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rajkumarpractice/app_config/app_constant.dart';
 import 'utils/route_management/navigation_service.dart';
 import 'utils/route_management/route_generator.dart';
 
@@ -14,10 +15,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Bloc Plugin',
       onGenerateRoute: RouteGenerator.generateRoutes,
-      initialRoute: '/',
+      initialRoute: '${AppConstant.ROOT_NAME}',
       navigatorKey: NavigationService.instance.navigatorKey,
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        appBarTheme: AppBarTheme(color: Colors.blueAccent,centerTitle: true,elevation: 10,actionsIconTheme: IconThemeData(color: Colors.white)),
+        appBarTheme: AppBarTheme(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            color: Colors.blueAccent,
+            centerTitle: true,
+            elevation: 10,
+            actionsIconTheme: IconThemeData(color: Colors.white),
+            foregroundColor: Colors.white),
         backgroundColor: Colors.white,
         errorColor: Colors.grey,
 

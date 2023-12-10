@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rajkumarpractice/logic/cart_bloc/cart_state.dart';
+
 
 import '../../../data/storage/database_helper.dart';
-import '../../home/model/home_model.dart';
+import 'package:rajkumarpractice/data/model/home_model.dart';
 
 class MyCartPage extends StatefulWidget {
   @override
@@ -10,79 +13,54 @@ class MyCartPage extends StatefulWidget {
 
 class _MyCartPageState extends State<MyCartPage> {
   final dbHelper = DatabaseHelper.instance;
-  List<HomeModel> _notes = [];
+
 
   @override
   void initState() {
     super.initState();
-    _loadNotes();
-  }
 
-  void _loadNotes() async {
-    List<HomeModel> notes = await dbHelper.getAllNotes();
-    setState(() {
-      _notes = notes;
-    });
   }
 
 
 
-  void _updateNote(int index) async {
-    HomeModel updatedNote = HomeModel(
-      id: _notes[index].id,
-      date:"" ,link:"" ,protected:false ,slug:"" ,
-    );
-    await dbHelper.update(updatedNote);
-    setState(() {
-      _notes[index] = updatedNote;
-    });
-  }
-
-  void _deleteNote(int index) async {
-    await dbHelper.delete(_notes[index].id!);
-    setState(() {
-      _notes.removeAt(index);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter SQLite CRUD'),
+        title: Text('Cart list',
+            overflow: TextOverflow.ellipsis,
+            style:
+            TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
       ),
-      body: ListView.builder(
-        itemCount: _notes.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(_notes[index].slug!),
-            subtitle: Text(_notes[index].link!),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.edit),
-                  onPressed: () {
-                    _updateNote(index);
-                  },
-                ),
-                IconButton
+      body: BlocBuilder<CartCubit, CartState>(
+        builder: (context, state) {
 
-                  (
-                  icon: Icon(Icons.delete),
-                  onPressed: () {
-                    _deleteNote(index);
-                  },
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          // _addNote();
+          if (state is LoadingState) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is ErrorState) {
+            return Center(
+              child: Icon(Icons.close),
+            );
+          } else if (state is LoadedState) {
+            final homeList = state.homeList;
+            print("homeList.length");
+            print(homeList.length);
+            print("homeList.length");
+            return ListView.builder(
+                itemCount: homeList.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(homeList[index].slug!),
+                    subtitle: Text(homeList[index].link!),
+                  );
+                });
+          } else {
+            return Center(child: Container(child: Text("No Data")));
+
+          }
         },
       ),
     );

@@ -3,7 +3,7 @@ part of 'cart_state.dart';
 class CartCubit extends Cubit<CartState> {
 
   CartCubit() : super(InitialState()) {
-    loadNotes();
+    getListFromDB();
   }
 
 
@@ -13,27 +13,23 @@ class CartCubit extends Cubit<CartState> {
 
   // final Repo repository;
 
-  Future<void> getListFromDB(int pagination) async {
+  Future<void> getListFromDB() async {
     try {
       emit(LoadingState());
 
-    _loadDataBaseList().then((List<HomeModel> HomeModellist){
-      homeList=HomeModellist;
-      });
+      homeList=await loadDataBaseList();
 
-      emit(LoadedState(await homeList as List<HomeModel>));
+      emit(LoadedState( homeList as List<HomeModel>));
     } catch (e) {
       emit(ErrorState());
     }
   }
 
-  Future<List<HomeModel>> _loadDataBaseList() async {
+  Future<List<HomeModel>> loadDataBaseList() async {
     List<HomeModel> notes = await dbHelper.getAllNotes();
     return notes;
   }
-  void loadNotes() async {
-    List<HomeModel> notes = await dbHelper.getAllNotes();
-  }
+
 
 
 

@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rajkumarpractice/logic/Home_bloc/home_cubit.dart';
+import 'package:rajkumarpractice/logic/Home_bloc/home_state.dart';
 
 import '../../../utils/route_management/navigation_service.dart';
-import '../bloc/home_cubit.dart';
-import '../bloc/home_state.dart';
+
 
 
 class Home extends StatefulWidget {
@@ -38,7 +39,8 @@ class _HomeState extends State<Home> {
           GestureDetector(onTap: (){
             _routeService.routeTo('/cart');
             print("navigated--------------------------");
-          },child:Icon(Icons.shopping_cart))
+          },child:Icon(Icons.shopping_cart)),
+          SizedBox(width: 10,)
         ],
 
       ),
@@ -68,10 +70,7 @@ class _HomeState extends State<Home> {
                             child: Center(child: CupertinoActivityIndicator()),
                           ):ListTile(
                             title: Text(homeList[index].slug!),
-                            leading: CircleAvatar(
-                              backgroundImage:
-                                  NetworkImage("${homeList[index].link!}"),
-                            ),
+
                             trailing: GestureDetector(onTap: (){
                               context.read<HomeCubit>().addDB(homeList[index]);
                               print("newdata in DB--------------------------");

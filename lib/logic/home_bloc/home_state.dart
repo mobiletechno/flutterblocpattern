@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:rajkumarpractice/data/model/home_model.dart';
 
-import '../model/home_model.dart';
 
 abstract class HomeState extends Equatable {}
 
