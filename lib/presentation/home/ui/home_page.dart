@@ -35,7 +35,6 @@ class _HomeState extends State<Home> {
         title: Text('Home list',overflow: TextOverflow.ellipsis,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold)),
 
         actions: [
-
           GestureDetector(onTap: (){
             _routeService.routeTo('/cart');
             print("navigated--------------------------");
@@ -45,7 +44,9 @@ class _HomeState extends State<Home> {
 
       ),
       body: BlocBuilder<HomeCubit, HomeState>(
+
         builder: (context, state) {
+
           if (state is LoadingState) {
             return Center(
               child: CircularProgressIndicator(),
@@ -62,8 +63,7 @@ class _HomeState extends State<Home> {
               physics: AlwaysScrollableScrollPhysics(),
               itemCount: homeList.length + 1,
               itemBuilder: (context, index) =>
-
-                       Card(
+                  Card(
                           child:  index > state.homeList!.length - 1
                               ? Container(
                             color: Colors.transparent,

@@ -12,11 +12,13 @@ import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   ScrollController scrollListenercontroller = ScrollController();
+  late final Repo repository;
   HomeCubit() : super(InitialState()) {
     scrollListenercontroller.addListener(_scrollListener);
-
+    this.repository=RepoImpl();
     getTrendingMovies(_paginationIndex);
   }
+
   Future<void> _scrollListener() async {
     if (scrollListenercontroller.hasClients) {
       if (scrollListenercontroller.position.pixels ==
@@ -36,16 +38,16 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  late Repo repository;
+
   int _paginationIndex = 10;
   final dbHelper = DatabaseHelper.instance;
-
+  // late Repo repository;
   // final Repo repository;
 
   Future<void> getTrendingMovies(int pagination) async {
     try {
       emit(LoadingState());
-      repository = RepoImpl();
+      // repository = RepoImpl();
       final homeList = await repository.getList(pagination);
       final resultPort = ReceivePort();
       await Isolate.spawn(
